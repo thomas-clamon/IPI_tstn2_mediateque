@@ -8,6 +8,19 @@ public class MediaService implements IMediaService{
 
 	private Statement sts = new MediaDao().getStatement();
 	
+	private boolean ajouterMedia(String request) {
+		
+		try {
+			sts.executeUpdate(request);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+		
+	
 	@Override
 	public boolean ajouterLivre(Livre l) {
 		
@@ -18,22 +31,20 @@ public class MediaService implements IMediaService{
 				l.prix_toString(),
 				l.getAuteur(),
 				l.getNbpage());
-		System.out.println(sql);
-		
-		try {
-			sts.executeUpdate(sql);
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
+		return ajouterMedia(sql);
 	}
-
+		
 	@Override
 	public boolean ajouterCD(CD cd) {
-		// TODO Auto-generated method stub
-		return false;
+		String sql = String.format("INSERT INTO Medias	 (type_media, nom, prix_achat, artiste, duree, nb_titre)"
+				+" VALUES ('%s', '%s', %s, '%s', %d, %d)", 
+				Type_media.CD.toString(),
+				cd.getNom(),
+				cd.prix_toString(),
+				cd.getAuteur(),
+				cd.getDuree(),
+				cd.getNbTitre());
+		return ajouterMedia(sql);
 	}
 
 	@Override

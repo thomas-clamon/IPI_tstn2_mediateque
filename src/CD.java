@@ -19,5 +19,26 @@ public class CD extends Medias{
 		return this.getPrix_achat() + 0.1F *(float) (duree/nbTitre);
 	}
 
+
+	public int getDuree() {
+		return duree;
+	}
+
+
+	public void setDuree(int duree) {
+		this.duree = duree;
+	}
+
+
+	public int getNbTitre() {
+		return nbTitre;
+	}
+
+
+	public void setNbTitre(int nbTitre) {
+		this.nbTitre = nbTitre;
+	}
+
+	
 	
 }
