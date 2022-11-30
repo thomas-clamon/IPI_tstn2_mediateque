@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 import java.util.List;
 import dao.MediaDao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -49,7 +51,50 @@ public class MediaService implements IMediaService{
 
 	@Override
 	public List<Medias> getAllMedia() {
-		// TODO Auto-generated method stub
+		
+		String SQL = "SELECT * FROM Medias";
+		
+		List<Medias> list = new ArrayList<>();
+		
+		try {
+			ResultSet rs = sts.executeQuery(SQL);
+			
+			while(rs.next()) {
+				
+				Type_media type = Type_media.valueOf(rs.getString("type_media"));
+				
+				// ce qui est commun ici :
+				String nom = rs.getString("nom");
+				float prix_achat = rs.getFloat("prix_achat");
+				String auteur = rs.getString("artiste");
+				
+				
+				switch (type) {
+				
+					case CD :
+						
+						int duree = rs.getInt("duree");
+						int nb_titre = rs.getInt("nb_titre");
+						CD cd = new CD(0, nom, prix_achat, auteur, duree, nb_titre);
+						list.add(cd);
+					break;
+					case LIVRE :
+					
+						int nb_page = rs.getInt("nb_page");
+						Livre livre = new Livre(0, nom, prix_achat, auteur, nb_page);
+						list.add(livre);
+					default :
+						// on fait rien	
+				
+				}
+				
+			}
+			return list;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

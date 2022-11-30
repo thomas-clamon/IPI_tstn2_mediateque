@@ -5,15 +5,17 @@ public abstract class Medias {
 	private String Nom;
 	private float prix_achat;
 	private String auteur;
+	private Type_media type;
 	
 	
 	
-	public Medias(int iD, String nom, float prix_achat, String auteur) {
+	public Medias(int iD, String nom, float prix_achat, String auteur, Type_media type) {
 		super();
 		ID = iD;
 		Nom = nom;
 		this.prix_achat = prix_achat;
 		this.auteur = auteur;
+		this.type = type;
 	}
 	
 	public String prix_toString() {
@@ -24,10 +26,20 @@ public abstract class Medias {
 
 	public String toString()
 	{
-		return String.format("Livre : %d | %s %f euros", getID(),getNom(), calculerPrix() );
+		return String.format("%s : %d | %s %f euros\n", getType().toString(), getID(),getNom(), calculerPrix() );
+		
 	}
 
 	public abstract float calculerPrix();
+	
+
+	public Type_media getType() {
+		return type;
+	}
+
+	public void setType(Type_media type) {
+		this.type = type;
+	}
 
 	public int getID() {
 		return ID;

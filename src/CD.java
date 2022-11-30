@@ -7,7 +7,7 @@ public class CD extends Medias{
 
 	public CD(int iD, String nom, float prix_achat, String auteur, 
 				int duree, int nbTitre) {
-		super(iD, nom, prix_achat, auteur);
+		super(iD, nom, prix_achat, auteur, Type_media.CD);
 		this.duree = duree;
 		this.nbTitre = nbTitre;
 	}

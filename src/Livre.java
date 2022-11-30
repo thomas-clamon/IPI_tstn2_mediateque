@@ -10,7 +10,7 @@ public class Livre extends Medias{
 	}
 
 	public Livre(int iD, String nom, float prix_achat, String auteur, int nbpage) {
-		super(iD, nom, prix_achat, auteur);
+		super(iD, nom, prix_achat, auteur, Type_media.LIVRE);
 		this.nbpage = nbpage;
 	}
 
